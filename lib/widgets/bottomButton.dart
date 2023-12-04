@@ -4,7 +4,7 @@ import '../specs/constants.dart';
 import '../views/homepage.dart';
 
 class BottomButton extends StatelessWidget {
-  const BottomButton({required this.buttonTitle, this.onTap});
+  const BottomButton({super.key, required this.buttonTitle, this.onTap});
   final VoidCallback? onTap;
   final String buttonTitle;
 

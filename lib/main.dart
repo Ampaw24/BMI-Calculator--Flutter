@@ -2,6 +2,9 @@
 
 import 'package:bmicalculator/views/homepage.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
+import 'controllers/bmicontoller.dart';
 
 
 void main() {
@@ -13,16 +16,19 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData.dark().copyWith(
-        primaryColor: Color(0xFF0A0E21),
-        scaffoldBackgroundColor: Color(0xFF0A0E21),
-                 textTheme:TextTheme(
-          
-         ),
+    return MultiProvider(
+      providers: [Provider<BMIcontroller>(create:(_)=>BMIcontroller())],
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        theme: ThemeData.dark().copyWith(
+          primaryColor: Color(0xFF0A0E21),
+          scaffoldBackgroundColor: Color(0xFF0A0E21),
+                   textTheme:TextTheme(
+            
+           ),
+        ),
+          home: InputApp(),
       ),
-        home: InputApp(),
     );
   }
 }
