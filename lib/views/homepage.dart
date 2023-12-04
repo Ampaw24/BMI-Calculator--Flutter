@@ -1,4 +1,5 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, use_key_in_widget_constructors
+import 'package:bmicalculator/controllers/bmicontoller.dart';
 import 'package:bmicalculator/specs/appcolors.dart';
 import 'package:bmicalculator/specs/cardcontent.dart';
 import 'package:bmicalculator/specs/constants.dart';
@@ -9,12 +10,9 @@ import 'package:bmicalculator/widgets/calculateBrain.dart';
 import 'package:bmicalculator/widgets/roundedbutton.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-
+import 'package:provider/provider.dart';
 
 const buttonHeight = 80.0;
-int height = 180;
-int weight = 200;
-int age = 25;
 
 enum Gender { male, female }
 
@@ -30,6 +28,7 @@ class _InputAppState extends State<InputApp> {
 
   @override
   Widget build(BuildContext context) {
+    final bmicontext = context.read<BMIcontroller>();
     return Scaffold(
         appBar: AppBar(
           backgroundColor: Color(0xFF0A0E21),
@@ -71,7 +70,7 @@ class _InputAppState extends State<InputApp> {
                       icons: FontAwesomeIcons.venus,
                     ),
                     color: selectedGender == Gender.female
-                       ? AppColors.activecolor
+                        ? AppColors.activecolor
                         : AppColors.inactiveCardcolor,
                   ),
                 )),
@@ -94,7 +93,7 @@ class _InputAppState extends State<InputApp> {
                           textBaseline: TextBaseline.alphabetic,
                           children: [
                             Text(
-                              height.toString(),
+                              bmicontext.height.toString(),
                               style: TextStyle(
                                   fontSize: textSize, fontWeight: fontweight),
                             ),
@@ -117,10 +116,10 @@ class _InputAppState extends State<InputApp> {
                             inactiveColor: Color(0xFF8D8E98),
                             min: 120,
                             max: 220,
-                            value: height.toDouble(),
+                            value: bmicontext.height.toDouble(),
                             onChanged: ((double value) {
                               setState(() {
-                                height = value.round();
+                                bmicontext.height = value.round();
                               });
                             }),
                           ),
@@ -145,7 +144,7 @@ class _InputAppState extends State<InputApp> {
                               textBaseline: TextBaseline.alphabetic,
                               children: [
                                 Text(
-                                  weight.toString(),
+                                  bmicontext.weight.toString(),
                                   style: numberStyleText(),
                                 ),
                               ],
@@ -156,7 +155,7 @@ class _InputAppState extends State<InputApp> {
                                 RoundedButton(
                                   onPressed: () {
                                     setState(() {
-                                      weight += 1;
+                                      bmicontext.weight += 1;
                                     });
                                   },
                                   reqicon: Icon(
@@ -170,7 +169,7 @@ class _InputAppState extends State<InputApp> {
                                 RoundedButton(
                                   onPressed: () {
                                     setState(() {
-                                      weight -= 1;
+                                      bmicontext.weight -= 1;
                                     });
                                   },
                                   reqicon: Icon(
@@ -197,7 +196,7 @@ class _InputAppState extends State<InputApp> {
                         textBaseline: TextBaseline.alphabetic,
                         children: [
                           Text(
-                            age.toString(),
+                            bmicontext.age.toString(),
                             style: numberStyleText(),
                           ),
                         ],
@@ -208,7 +207,7 @@ class _InputAppState extends State<InputApp> {
                           RoundedButton(
                             onPressed: () {
                               setState(() {
-                                age += 1;
+                                bmicontext.age += 1;
                               });
                             },
                             reqicon: Icon(
@@ -222,7 +221,7 @@ class _InputAppState extends State<InputApp> {
                           RoundedButton(
                             onPressed: () {
                               setState(() {
-                                age -= 1;
+                                bmicontext.age -= 1;
                               });
                             },
                             reqicon: Icon(
@@ -241,15 +240,8 @@ class _InputAppState extends State<InputApp> {
             BottomButton(
               buttonTitle: "Calculate",
               onTap: () {
-                CalculateBmi calc =CalculateBmi(height: height, weight: weight);
-              
-                calc.getInterpretation();
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => ResultsPage(
-                      bmiresult:  calc.Calculator(),
-                      bmiInter: calc.getInterpretation(),
-                      bmiStatus: calc.getResults(),
-                    )));
+                print(bmicontext.calculateBmi(
+                    bmicontext.height, bmicontext.weight));
               },
             ),
           ],
