@@ -1,4 +1,5 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, use_key_in_widget_constructors
+import 'package:bmicalculator/specs/appcolors.dart';
 import 'package:bmicalculator/specs/cardcontent.dart';
 import 'package:bmicalculator/specs/constants.dart';
 import 'package:bmicalculator/views/resultspage.dart';
@@ -11,9 +12,6 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 
 const buttonHeight = 80.0;
-const activecolor = Color(0xFF1D1E33);
-const buttoncolor = Color(0xFFEB1555);
-const inactiveCardcolor = Color(0xFF111328);
 int height = 180;
 int weight = 200;
 int age = 25;
@@ -56,9 +54,9 @@ class _InputAppState extends State<InputApp> {
                       icons: FontAwesomeIcons.mars,
                       gender: "Male",
                     ),
-                    colour: selectedGender == Gender.male
-                        ? activecolor
-                        : inactiveCardcolor,
+                    color: selectedGender == Gender.male
+                        ? AppColors.activecolor
+                        : AppColors.inactiveCardcolor,
                   ),
                 )),
                 Expanded(
@@ -72,9 +70,9 @@ class _InputAppState extends State<InputApp> {
                       gender: "FEMALE",
                       icons: FontAwesomeIcons.venus,
                     ),
-                    colour: selectedGender == Gender.female
-                        ? activecolor
-                        : inactiveCardcolor,
+                    color: selectedGender == Gender.female
+                       ? AppColors.activecolor
+                        : AppColors.inactiveCardcolor,
                   ),
                 )),
               ],
@@ -98,7 +96,7 @@ class _InputAppState extends State<InputApp> {
                             Text(
                               height.toString(),
                               style: TextStyle(
-                                  fontSize: textSize, fontWeight: fontb),
+                                  fontSize: textSize, fontWeight: fontweight),
                             ),
                             Text(
                               "cm",
@@ -129,7 +127,7 @@ class _InputAppState extends State<InputApp> {
                         )
                       ],
                     ),
-                    colour: Color(0xFF1D1E33))),
+                    color: Color(0xFF1D1E33))),
             Expanded(
                 child: Row(
               children: [
@@ -184,7 +182,7 @@ class _InputAppState extends State<InputApp> {
                             )
                           ],
                         ),
-                        colour: Color(0xFF1D1E33))),
+                        color: Color(0xFF1D1E33))),
                 Expanded(
                     child: Blocks(
                   conts: Column(
@@ -236,7 +234,7 @@ class _InputAppState extends State<InputApp> {
                       )
                     ],
                   ),
-                  colour: Color(0xFF1D1E33),
+                  color: Color(0xFF1D1E33),
                 ))
               ],
             )),

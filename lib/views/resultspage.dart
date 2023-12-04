@@ -1,4 +1,7 @@
 
+// ignore_for_file: use_key_in_widget_constructors
+
+import 'package:bmicalculator/specs/appcolors.dart';
 import 'package:bmicalculator/specs/constants.dart';
 import 'package:bmicalculator/widgets/blocks.dart';
 import 'package:bmicalculator/widgets/bottomButton.dart';
@@ -6,7 +9,7 @@ import 'package:flutter/material.dart';
 
 
 class ResultsPage extends StatelessWidget {
-  ResultsPage(
+  const ResultsPage(
       {required this.bmiInter,
       required this.bmiStatus,
       required this.bmiresult});
@@ -18,8 +21,8 @@ class ResultsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Color(0xFF0A0E21),
-        title: Center(child: Text("BMI-CALCULATOR")),
+        backgroundColor:const  Color(0xFF0A0E21),
+        title:const Center(child: Text("BMI-CALCULATOR")),
         elevation: 0,
       ),
       body: Column(
@@ -30,7 +33,7 @@ class ResultsPage extends StatelessWidget {
               child: Container(
             padding: const EdgeInsets.all(15),
             alignment: Alignment.bottomLeft,
-            child: Text(
+            child:const Text(
               "Your Results",
               style: kTitleFnt,
             ),
@@ -38,7 +41,7 @@ class ResultsPage extends StatelessWidget {
           Expanded(
             flex: 5,
             child: Blocks(
-              colour: activecolor,
+              color: AppColors.activecolor,
               conts: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
