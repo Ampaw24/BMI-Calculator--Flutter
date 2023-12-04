@@ -10,6 +10,7 @@ import 'package:bmicalculator/widgets/calculateBrain.dart';
 import 'package:bmicalculator/widgets/roundedbutton.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
 const buttonHeight = 80.0;
@@ -32,50 +33,73 @@ class _InputAppState extends State<InputApp> {
     return Scaffold(
         appBar: AppBar(
           backgroundColor: Color(0xFF0A0E21),
-          title: Center(child: Text("BMI-CALCULATOR")),
+          title: Center(
+              child: Text(
+            "BMI-CALCULATOR",
+            style: TextStyle(fontWeight: FontWeight.bold),
+          )),
           elevation: 0,
         ),
         body: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             Expanded(
-                child: Row(
-              children: [
-                Expanded(
-                    child: GestureDetector(
-                  onTap: () {
-                    setState(() {
-                      selectedGender = Gender.male;
-                    });
-                  },
-                  child: Blocks(
-                    conts: CardContent(
-                      icons: FontAwesomeIcons.mars,
-                      gender: "Male",
+                child: Blocks(
+                    conts: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Container(
+                          margin: const EdgeInsets.symmetric(
+                              horizontal: 15, vertical: 10),
+                          child: Text(
+                            "BMI-Results",
+                            style: GoogleFonts.poppins(
+                                fontSize: 17,
+                                fontWeight: FontWeight.w600,
+                                color: Colors.white),
+                          ),
+                        ),
+                        Container(
+                          margin: const EdgeInsets.symmetric(
+                              horizontal: 15, vertical: 10),
+                          child: Text("Height:    ${bmicontext.height}",
+                              style: GoogleFonts.poppins(
+                                  fontSize: 17,
+                                  fontWeight: FontWeight.w600,
+                                  color: Colors.white)),
+                        ),
+                        Container(
+                          margin: const EdgeInsets.symmetric(
+                              horizontal: 15, vertical: 5),
+                          child: Text(
+                            "Weight:    ${bmicontext.weight}",
+                            style: GoogleFonts.poppins(
+                                fontSize: 17,
+                                fontWeight: FontWeight.w600,
+                                color: Colors.white),
+                          ),
+                        ),
+                        Container(
+                          margin: const EdgeInsets.symmetric(
+                              horizontal: 15, vertical: 10),
+                          child: Text(
+                            "Body Mass Index:  ${bmicontext.calculateBmi(bmicontext.height, bmicontext.weight).ceil()}",
+                            style: GoogleFonts.poppins(
+                                fontSize: 17,
+                                fontWeight: FontWeight.w600,
+                                color: Colors.white),
+                          ),
+                        ),
+                        Container(
+                            margin: const EdgeInsets.only(left: 330, top: 7),
+                            child: Icon(
+                              FontAwesomeIcons.circleInfo,
+                              size: 23,
+                            )),
+                      ],
                     ),
-                    color: selectedGender == Gender.male
-                        ? AppColors.activecolor
-                        : AppColors.inactiveCardcolor,
-                  ),
-                )),
-                Expanded(
-                    child: GestureDetector(
-                  onTap: () {
-                    selectedGender = Gender.female;
-                    print("Female Tap");
-                  },
-                  child: Blocks(
-                    conts: CardContent(
-                      gender: "FEMALE",
-                      icons: FontAwesomeIcons.venus,
-                    ),
-                    color: selectedGender == Gender.female
-                        ? AppColors.activecolor
-                        : AppColors.inactiveCardcolor,
-                  ),
-                )),
-              ],
-            )),
+                    color: Color(0xFF1D1E33))),
             Expanded(
                 child: Blocks(
                     conts: Column(
@@ -98,7 +122,7 @@ class _InputAppState extends State<InputApp> {
                                   fontSize: textSize, fontWeight: fontweight),
                             ),
                             Text(
-                              "cm",
+                              " cm",
                               style: TextStyle(fontSize: 18.0),
                             ),
                           ],
@@ -114,7 +138,7 @@ class _InputAppState extends State<InputApp> {
                                   RoundSliderOverlayShape(overlayRadius: 30.0)),
                           child: Slider(
                             inactiveColor: Color(0xFF8D8E98),
-                            min: 120,
+                            min: 100,
                             max: 220,
                             value: bmicontext.height.toDouble(),
                             onChanged: ((double value) {
@@ -153,6 +177,7 @@ class _InputAppState extends State<InputApp> {
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 RoundedButton(
+                                  onLongP: () => bmicontext.height = 0,
                                   onPressed: () {
                                     setState(() {
                                       bmicontext.weight += 1;
